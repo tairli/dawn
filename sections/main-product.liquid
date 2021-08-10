@@ -358,6 +358,7 @@
               width="1100"
               height="{{ 1100 | divided_by: media.preview_image.aspect_ratio | ceil }}"
               data-media-id="{{ media.id }}"
+              style="max-width: {{media.preview_image.width}}px;"
             >
           {%- else -%}
             {%- if media.media_type == 'model' -%}
@@ -387,6 +388,7 @@
                   width="576"
                   height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
                   alt="{{ media.preview_image.alt | escape }}"
+              style="max-width: {{media.preview_image.width}}px;"
                 >
               </button>
               <template>
