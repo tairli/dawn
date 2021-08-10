@@ -1155,7 +1155,8 @@
         "description": {
           "name": "Description",
           "settings": {
-            "tabbed": "Parse for H6 tabs"
+            "tabbed": "Parse for H6 tabs",
+            "open": "Start first tab open"
           }
         },
         "share": {
