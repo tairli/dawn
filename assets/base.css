@@ -2112,3 +2112,11 @@ details-disclosure > details {
   color: rgb(var(--color-foreground));
   word-break: break-word;
 }
+
+  /* --tim: tame embedded videos	*/
+  .rte iframe {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    min-height: 316px;
+  }
