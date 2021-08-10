@@ -52,6 +52,9 @@
           assign size_x = size | append: 'x'
           if media.preview_image.width >= size 
               echo media.preview_image | img_url: size_x | append: ' ' | append: size | append: 'w '
+          else
+	          echo media.preview_image | img_url: 'master' | append: ' ' | append:  media.preview_image.width | append: 'w '
+              break
           endif         
       endfor 
     endcapture
