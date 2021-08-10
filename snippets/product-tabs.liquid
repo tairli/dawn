@@ -24,6 +24,11 @@
 	{% assign tab_heads = tab_heads | remove_first: ",," | split: ",," %}
 	{% assign tab_texts = tab_texts | remove_first: ",," | split: ",," %}
 
+<!--
+
+{{ tab_heads | json }}
+
+-->
 
 	{% if pretext %}
       <div class="product__description rte">
