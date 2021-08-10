@@ -188,6 +188,7 @@
       {
         "type": "range",
         "id": "product_split",
+        "label": "t:settings_schema.layout.settings.product_split.label",
         "min": 25,
         "max": 75,
         "step": 1,
