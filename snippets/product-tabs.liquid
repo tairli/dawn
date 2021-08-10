@@ -1,0 +1,51 @@
+{% assign combine_pretext = false %}
+
+{% if description contains "<h6>" %}
+	{% assign tab_heads = '' %}
+	{% assign tab_texts = '' %}
+	{% assign pretext = '' %}
+
+	{% assign chunks = description | strip | split: "<h6>" %}
+	{% for c in chunks %}
+		{% if c contains "</h6>" %}
+			{% assign chunk = c | split: "</h6>" %}
+			{% assign tab_heads = tab_heads | append: ",," | append: chunk.first %}
+			{% assign tab_texts = tab_texts | append: ",," %}
+			{% if pretext != blank  and combine_pretext %}
+				{% assign tab_texts = tab_texts | append: pretext | append: "<br>" %}
+				{% assign pretext = '' %}
+			{% endif %}
+			{% assign tab_texts = tab_texts | append: chunk.last  %}
+		{% elsif forloop.first %}
+			{% assign pretext =  c %}
+		{% endif %}
+	{% endfor %}
+
+	{% assign tab_heads = tab_heads | remove_first: ",," | split: ",," %}
+	{% assign tab_texts = tab_texts | remove_first: ",," | split: ",," %}
+
+
+            <div class="product__accordion accordion" {{ block.shopify_attributes }}>
+              <details>
+                <summary>
+                  <div class="summary__title">
+                    {% render 'icon-accordion', icon: block.settings.icon %}
+                    <h2 class="h4 accordion__title">
+                      {{ block.settings.heading | default: block.settings.page.title }}
+                    </h2>
+                  </div>
+                  {% render 'icon-caret' %}
+                </summary>
+                <div class="accordion__content rte">
+                  {{ block.settings.content }}
+                  {{ block.settings.page.content }}
+                </div>
+              </details>
+            </div>
+
+
+{% else %}
+  <div class="product__description rte">
+    {{ description }}
+  </div>
+{% endif %}
