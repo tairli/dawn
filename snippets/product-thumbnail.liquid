@@ -7,8 +7,6 @@
     - loop: {Boolean} Enable video looping (optional)
     - modal_id: {String} The product modal that will be shown by clicking the thumbnail
 
-	- split:	percentage of product element width used for media on desktop
-
     Usage:
     {% render 'product-thumbnail',
       media: media,
@@ -23,8 +21,8 @@
 
 {% liquid 
 
-	assign percentage = split | default: 64
-    assign percentage = percentage | divided_by: 100.0 
+	assign split = section.settings.media_space | default: 64
+    assign split = split | divided_by: 100.0 
     
 %}
 
@@ -41,7 +39,7 @@
           {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
           {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
         src="{{ media | img_url: '1500x' }}"
-        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: percentage | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: split | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
         loading="lazy"
         width="576"
         height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
@@ -60,7 +58,7 @@
           {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
           {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
         src="{{ media | img_url: '1500x' }}"
-        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: percentage | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: split | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
         loading="lazy"
         width="576"
         height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
@@ -92,7 +90,7 @@
         {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
         {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
       src="{{ media | img_url: '1500x' }}"
-      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: percentage | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: split | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
       loading="lazy"
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
@@ -133,7 +131,7 @@
         {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
         {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
       src="{{ media | img_url: '1500x' }}"
-      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: percentage | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+      sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: split | round }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
       loading="lazy"
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
