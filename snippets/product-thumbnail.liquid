@@ -47,7 +47,7 @@
 		{%- assign _size = size | times: 1 -%}
 		{%- assign size_x = size | append: 'x' -%}
 		{%- unless forloop.first %}, {% endunless %}
-		{%- if media.preview_image.width >= size %}{{ media.preview_image | img_url: size_x }} {{ size }}w{% endif %}
+		{%- if media.preview_image.width >= _size %}{{ media.preview_image | img_url: size_x }} {{ size }}w{% endif %}
     {% endfor %}
 {%- endcapture -%}
 
