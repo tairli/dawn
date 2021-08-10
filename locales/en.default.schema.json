@@ -1153,7 +1153,10 @@
           "name": "Pickup availability"
         },
         "description": {
-          "name": "Description"
+          "name": "Description",
+          "settings": {
+            "tabbed": "Parse for H6 tabs"
+          }
         },
         "share": {
           "name": "Share",
