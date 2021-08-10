@@ -28,28 +28,31 @@
     assign split = split | divided_by: 100.0 
 
 	assign desktop_width = settings.page_width | minus: 100 | times: split | round
-    
-	for size in image_sizes
-    	unless forloop.first 
-	    	assign _sizes = _sizes | append: ","
-        endunless 
-        
-        if desktop_width < size 
-        	assign _sizes = _sizes | append: desktop_width
-	    	assign _sizes = _sizes | append: ","
-		endif 
-        
-        assign _sizes = _sizes | append: _size        
-    endfor 
+
+    capture srcset
+      for _size in image_sizes
+
+          unless forloop.first 
+          	echo ', ' 
+          endunless
+
+          assign size = _size | times: 1
+          if desktop_width < size 
+              assign size = desktop_width
+              assign size_x = size | append: 'x'
+
+              if media.preview_image.width >= size 
+                  echo media.preview_image | img_url: size_x | append: ' ' | append: size | append: 'w'
+              endif 
+          endif 
+          assign size_x = size | append: 'x'
+
+          if media.preview_image.width >= size 
+              echo media.preview_image | img_url: size_x | append: ' ' | append: size | append: 'w'
+          endif         
+      endfor 
+    endcapture
 %}
-{% capture srcset %}
-	{%- for size in _sizes -%}
-		{%- assign _size = size | times: 1 -%}
-		{%- assign size_x = size | append: 'x' -%}
-		{%- unless forloop.first %}, {% endunless %}
-		{%- if media.preview_image.width >= _size %}{{ media.preview_image | img_url: size_x }} {{ size }}w{% endif %}
-    {% endfor %}
-{%- endcapture -%}
 
 
 <noscript>
