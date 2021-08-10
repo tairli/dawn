@@ -36,8 +36,8 @@
           unless forloop.first 
           	echo ', ' 
           endunless
-
           assign size = _size | times: 1
+          
           if check_for_desktop_width and desktop_width < size 
               assign size = desktop_width
               assign size_x = size | append: 'x'
@@ -47,6 +47,8 @@
               endif 
               assign check_for_desktop_width = false
           endif 
+          
+          assign size = _size | times: 1
           assign size_x = size | append: 'x'
 
           if media.preview_image.width >= size 
