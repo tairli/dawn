@@ -37,7 +37,6 @@
 
 	{% for head in tab_heads %}
             <div class="product__accordion accordion" >
-<!-- {{ forloop.first | json }} -- {{ settings | json }} -->              
               <details {% if forloop.first and settings.open %} open {% endif %} >
                 <summary>
                   <div class="summary__title">
