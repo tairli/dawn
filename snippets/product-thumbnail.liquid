@@ -29,6 +29,7 @@
 
 	assign desktop_width = settings.page_width | minus: 100 | times: split | round
 
+	assign check_for_desktop_width = true
     capture srcset
       for _size in image_sizes
 
@@ -37,13 +38,14 @@
           endunless
 
           assign size = _size | times: 1
-          if desktop_width < size 
+          if check_for_desktop_width and desktop_width < size 
               assign size = desktop_width
               assign size_x = size | append: 'x'
 
               if media.preview_image.width >= size 
                   echo media.preview_image | img_url: size_x | append: ' ' | append: size | append: 'w, '
               endif 
+              assign check_for_desktop_width = false
           endif 
           assign size_x = size | append: 'x'
 
