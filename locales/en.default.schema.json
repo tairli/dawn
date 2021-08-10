@@ -1287,7 +1287,7 @@
         "enable_video_looping": {
           "label": "Enable video looping"
         },
-        "product_split": {
+        "media_space": {
           "label": "Media size on desktop"
         }
       }
