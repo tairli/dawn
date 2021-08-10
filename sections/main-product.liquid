@@ -115,7 +115,7 @@
             </div>
           {%- when 'description' -%}
             {%- if product.description != blank -%}
-        		{% if block.settings.tabbed_description %}
+        		{% if block.settings.tabbed %}
         			{% render 'product-tabs', description: product.description %} 
         		{% else %}
                   <div class="product__description rte">
