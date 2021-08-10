@@ -13,21 +13,42 @@
       position: forloop.index,
       loop: section.settings.enable_video_looping,
       modal_id: section.id,
-      
-	  split: 64
 	
     %}
 {% endcomment %}
 
 {% liquid 
 
+	assign image_sizes = "288,576,750,1100,1500"
+    
+    
+    assign image_sizes = image_sizes | split: ","
+
 	assign split = section.settings.media_space | default: 64
     assign split = split | divided_by: 100.0 
 
 	assign desktop_width = settings.page_width | minus: 100 | times: split | round
     
+	for size in image_sizes
+    	unless forloop.first 
+	    	assign _sizes = _sizes | append: ","
+        endunless 
+        
+        if desktop_width < size 
+        	assign _sizes = _sizes | append: desktop_width
+	    	assign _sizes = _sizes | append: ","
+		endif 
+        
+        assign _sizes = _sizes | append: _size        
+    endfor 
 %}
-
+{% capture srcset %}
+	{%- for size in _sizes -%}
+		{%- assign size_x = size | append: 'x' -%}
+		{%- unless forloop.first %}, {% endunless %}
+		{%- if media.preview_image.width >= size %}{{ media.preview_image | img_url: size_x }} {{ size }}w{% endif %}
+    {% endfor %}
+{%- endcapture -%}
 
 
 <noscript>
@@ -35,18 +56,14 @@
     <span class="product__media-icon motion-reduce">{% render 'icon-play' %}</span>
     <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
       <img
-        srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-          {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-          {% if media.preview_image.width >= 750 %}{{ media.preview_image | img_url: '750x' }} 750w,{% endif %}
-          {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
-          {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
-        src="{{ media | img_url: '1500x' }}"
-        sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-        loading="lazy"
-        width="576"
-        height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
-        alt="{{ media.preview_image.alt | escape }}"
-      >
+           srcset="{{ srcset }}"
+           src="{{ media | img_url: '1500x' }}"
+           sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+           loading="lazy"
+           width="576"
+           height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
+           alt="{{ media.preview_image.alt | escape }}"
+           >
     </div>
     <a href="{% if media.media_type == 'video' %}{{ media.sources[1].url }}{% else %}{{ media | external_video_url }}{% endif %}" class="product__media-toggle">
       <span class="visually-hidden">{{ 'products.product.video_exit_message' | t: title: product.title | escape }}</span>
@@ -54,18 +71,14 @@
   {%- else -%}
     <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
       <img
-        srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-          {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-          {% if media.preview_image.width >= 750 %}{{ media.preview_image | img_url: '750x' }} 750w,{% endif %}
-          {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
-          {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
-        src="{{ media | img_url: '1500x' }}"
-        sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-        loading="lazy"
-        width="576"
-        height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
-        alt="{{ media.preview_image.alt | escape }}"
-      >
+           srcset="{{ srcset }}"
+           src="{{ media | img_url: '1500x' }}"
+           sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+           loading="lazy"
+           width="576"
+           height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
+           alt="{{ media.preview_image.alt | escape }}"
+           >
     </div>
   {%- endif -%}
 </noscript>
@@ -86,18 +99,14 @@
 
   <div class="product__media media media--transparent" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
     <img
-      srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-        {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-        {% if media.preview_image.width >= 750 %}{{ media.preview_image | img_url: '750x' }} 750w,{% endif %}
-        {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
-        {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
-      src="{{ media | img_url: '1500x' }}"
-      sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-      loading="lazy"
-      width="576"
-      height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
-      alt="{{ media.preview_image.alt | escape }}"
-    >
+         srcset="{{ srcset }}"
+         src="{{ media | img_url: '1500x' }}"
+         sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+         loading="lazy"
+         width="576"
+         height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
+         alt="{{ media.preview_image.alt | escape }}"
+         >
   </div>
   <button class="product__media-toggle" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
     <span class="visually-hidden">
@@ -127,18 +136,14 @@
       {%- endif -%}
     </span>
     <img
-      srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-        {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-        {% if media.preview_image.width >= 750 %}{{ media.preview_image | img_url: '750x' }} 750w,{% endif %}
-        {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w,{% endif %}
-        {% if media.preview_image.width >= 1500 %}{{ media.preview_image | img_url: '1500x' }} 1500w{% endif %}"
-      src="{{ media | img_url: '1500x' }}"
-      sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-      loading="lazy"
-      width="576"
-      height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
-      alt="{{ media.preview_image.alt | escape }}"
-    >
+         srcset="{{ srcset }}"
+         src="{{ media | img_url: '1500x' }}"
+         sizes="(min-width: {{ settings.page_width }}px) {{ desktop_width }}px, (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+         loading="lazy"
+         width="576"
+         height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
+         alt="{{ media.preview_image.alt | escape }}"
+         >
   </button>
   <template>
     {%- liquid
