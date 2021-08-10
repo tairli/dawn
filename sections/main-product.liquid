@@ -115,9 +115,13 @@
             </div>
           {%- when 'description' -%}
             {%- if product.description != blank -%}
-              <div class="product__description rte">
-                {{ product.description }}
-              </div>
+        		{% if block.settings.tabbed_description %}
+        			{% render 'product-tabs', description: product.description %} 
+        		{% else %}
+                  <div class="product__description rte">
+                    {{ product.description }}
+                  </div>
+        		{% endif %}
             {%- endif -%}
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
