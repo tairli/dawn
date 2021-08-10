@@ -47,6 +47,8 @@
         "description": {
           "type": "description",
           "settings": {
+            "tabbed": true,
+            "open": true
           }
         },
         "share": {
@@ -69,7 +71,7 @@
       "settings": {
         "enable_sticky_info": true,
         "enable_video_looping": false,
-        "product_split": 50
+        "media_space": 64
       }
     },
     "product-recommendations": {
