@@ -176,9 +176,6 @@
           "options__2": {
             "label": "1600px"
           }
-        },
-        "product_split": {
-          "label": "Product page media size on desktop"
         }
       }
     }
@@ -1289,6 +1286,9 @@
         },
         "enable_video_looping": {
           "label": "Enable video looping"
+        },
+        "product_split": {
+          "label": "Product page media size on desktop"
         }
       }
     },
