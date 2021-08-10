@@ -1288,7 +1288,7 @@
           "label": "Enable video looping"
         },
         "product_split": {
-          "label": "Product page media size on desktop"
+          "label": "Media size on desktop"
         }
       }
     },
