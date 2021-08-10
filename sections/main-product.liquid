@@ -12,9 +12,9 @@
 
 
 {% style %}
-  {% if section.settings.product_split != 64 %}
-	{% assign media_width = section.settings.product_split %}
-	{% assign info_width = 100 | minus: section.settings.product_split %}
+  {% if section.settings.media_space != 64 %}
+	{% assign media_width = section.settings.media_space %}
+	{% assign info_width = 100 | minus: section.settings.media_space %}
 
     @media screen and (min-width: 990px) {
       .product:not(.product--no-media) .product__media-wrapper {
@@ -772,8 +772,8 @@
     },
       {
         "type":	"range",
-        "id":	"product_split",
-        "label": "t:sections.main-product.settings.product_split.label",
+        "id":	"media_space",
+        "label": "t:sections.main-product.settings.media_space.label",
         "min":	25,
         "max":	75,
         "step":	1,
