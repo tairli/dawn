@@ -747,7 +747,17 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
-    }
+    },
+      {
+        "type":	"range",
+        "id":	"product_split",
+        "label": "t:sections.main-product.settings.product_split.label",
+        "min":	25,
+        "max":	75,
+        "step":	1,
+        "unit":	"%",
+        "default":	64
+      }
   ]
 }
 {% endschema %}
