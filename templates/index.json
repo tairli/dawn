@@ -1,60 +1,59 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "settings": {
-        "desktop_text_box_position": "flex-end"
-      },
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_label_2": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ]
-    },
     "featured_products": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products"
+        "title": "Featured products",
+        "collection": "best-selling-collection",
+        "products_to_show": 4,
+        "show_view_all": false,
+        "swipe_on_mobile": true,
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_image_outline": true,
+        "show_vendor": false
       }
     },
-    "image_text": {
-      "type": "image-with-text",
+    "16286790323ef8801a": {
+      "type": "collection-list",
       "blocks": {
-        "heading": {
-          "type": "heading"
+        "16286790323ef8801a-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "20s"
+          }
         },
-        "text": {
-          "type": "text"
+        "16286790323ef8801a-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "30s"
+          }
         },
-        "button": {
-          "type": "button"
+        "16286790323ef8801a-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "40s"
+          }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
-      ]
+        "16286790323ef8801a-0",
+        "16286790323ef8801a-1",
+        "16286790323ef8801a-2"
+      ],
+      "settings": {
+        "title": "Collections",
+        "image_ratio": "square",
+        "color_scheme": "background-1",
+        "swipe_on_mobile": true,
+        "image_padding": false,
+        "show_view_all": false
+      }
     }
   },
   "order": [
-    "image_banner",
     "featured_products",
-    "image_text"
+    "16286790323ef8801a"
   ]
 }
