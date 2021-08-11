@@ -48,7 +48,7 @@
           "type": "description",
           "settings": {
             "tabbed": true,
-            "open": true
+            "open": false
           }
         },
         "share": {
