@@ -1047,6 +1047,9 @@
           },
           "options__3": {
             "label": "Square"
+          },
+          "options__4": {
+            "label": "Circle"
           }
         },
         "show_secondary_image": {
